@@ -6,21 +6,13 @@ import androidx.lifecycle.ViewModel
 
 class LoginViewModel : ViewModel() {
 
-    private val _currentValue = MutableLiveData<Int>()
+    private val _isFormValid = MutableLiveData<Boolean>()
 
-    val currentValue : LiveData<Int>
-        get() = _currentValue
+    val isFormValid: LiveData<Boolean>
+        get() = _isFormValid
 
-    init {
-        _currentValue.value = 0
-    }
-
-    fun plusValue() {
-        _currentValue.value?.plus(1)
-    }
-
-    fun minusValue() {
-        _currentValue.value?.minus(1)
+    fun setForm(str: String) {
+        _isFormValid.value = str.isNotEmpty()
     }
 
     override fun onCleared() {
