@@ -5,12 +5,13 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import kr.jiho.kotlinmvvm.databinding.ActivityLoginBinding
 import kr.jiho.kotlinmvvm.model.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
 
     lateinit var mainViewModel: LoginViewModel
-    //lateinit var binding: Binding
+    lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
