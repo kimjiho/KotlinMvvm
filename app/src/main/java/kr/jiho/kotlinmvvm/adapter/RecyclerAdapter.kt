@@ -19,8 +19,9 @@ class RecyclerAdapter(private val dataSet: ArrayList<Photo>) : RecyclerView.Adap
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val value = dataSet[position]
         val author = value.author
+        val strId = value.id
 
-        holder.tv.text = author
+        holder.tv.text = "$strId, $author"
     }
 
     override fun getItemCount(): Int {
