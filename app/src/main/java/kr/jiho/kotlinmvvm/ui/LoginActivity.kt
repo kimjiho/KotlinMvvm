@@ -66,6 +66,8 @@ class LoginActivity : AppCompatActivity() {
         btn_login.setOnClickListener {
             // todo call api
 
+            // todo use to datastore
+
             Intent(applicationContext, MainActivity::class.java).apply {
                 startActivity(this)
                 finishAffinity()

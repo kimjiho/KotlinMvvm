@@ -6,21 +6,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kr.jiho.kotlinmvvm.R
+import kr.jiho.kotlinmvvm.net.Photo
 
-class RecyclerAdapter(private val dataSet: Array<String>) : RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
+class RecyclerAdapter(private val dataSet: ArrayList<Photo>) : RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
-        // todo view bind
-
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.recycle_item, parent, false)
         return RecycleViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
-        // todo setting value
+        val value = dataSet[position]
+        val author = value.author
 
-        holder.tv.text = dataSet[position]
+        holder.tv.text = author
     }
 
     override fun getItemCount(): Int {
