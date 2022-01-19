@@ -11,5 +11,6 @@
         android:text="111 일이삼사"
         android:textSize="18sp"
         android:gravity="center_vertical"
+        android:textColor="@color/black"
         />
 </LinearLayout>

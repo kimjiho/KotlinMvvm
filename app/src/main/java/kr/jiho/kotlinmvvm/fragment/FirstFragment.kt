@@ -61,9 +61,9 @@ class FirstFragment : Fragment() {
     }
 
     val list = ArrayList<Photo>()
-    private val photoObserver = object: DisposableObserver<Photo>() {
-        override fun onNext(t: Photo?) {
-            if(t != null) list.add(t)
+    private val photoObserver = object: DisposableObserver<ArrayList<Photo>>() {
+        override fun onNext(t: ArrayList<Photo>?) {
+            if(t != null) list.addAll(t)
         }
 
         override fun onError(e: Throwable?) {
@@ -79,5 +79,11 @@ class FirstFragment : Fragment() {
             fBinding.recyclerView.layoutManager = LinearLayoutManager(context)
             fBinding.recyclerView.adapter = adapter
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        if(!photoObserver.isDisposed)
+            photoObserver.dispose()
     }
 }

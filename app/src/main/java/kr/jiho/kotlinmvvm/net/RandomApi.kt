@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface RandomApi {
 
     @GET("v2/list")
-    fun getPhotoList(): Observable<Photo>
+    fun getPhotoList(): Observable<ArrayList<Photo>>
 }
