@@ -9,8 +9,8 @@ class LoginViewModel : ViewModel() {
 
     private val _isFormValid = MutableLiveData<Boolean>()
 
-    private val idValue = MutableLiveData<String>("")
-    private val pwdValue = MutableLiveData<String>("")
+    private val idValue = MutableLiveData("")
+    private val pwdValue = MutableLiveData("")
 
     val isFormValid: LiveData<Boolean>
         get() = _isFormValid
