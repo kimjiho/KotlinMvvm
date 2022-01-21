@@ -52,9 +52,16 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
         }
     }
 
-    // api
     fun getPhotoList() {
+        // loading visible
         binding.loadingProgress.visibility = View.VISIBLE
+
+        /*
+        * 1. Repository 에서 리트로핏 과 Api 클래스를 만들고
+        *    기능을 호출한다.
+        * Repository > Retrofit, ApiClass, get function
+        *
+        * */
 
         val item = repo.getPhotoList(_index.value!!).subscribeWith(object: DisposableObserver<ArrayList<Photo>>(){
             override fun onNext(t: ArrayList<Photo>?) {
@@ -69,11 +76,15 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
 
             override fun onError(e: Throwable?) {
                 e?.printStackTrace()
+
+                // loading hidden
                 binding.loadingProgress.visibility = View.GONE
             }
 
             override fun onComplete() {
                 adapter.notifyDataSetChanged()
+
+                // loading hidden
                 binding.loadingProgress.visibility = View.GONE
             }
         })

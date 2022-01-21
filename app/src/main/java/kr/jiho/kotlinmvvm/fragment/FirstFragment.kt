@@ -22,9 +22,6 @@ class FirstFragment : Fragment() {
     ): View {
         Log.w("DEBUG", "onCreateView")
         fBinding = FirstFragmentBinding.inflate(inflater, container, false)
-        //recyclerView.layoutManager = LinearLayoutManager(context)
-        //adapter = RecyclerAdapter(list)
-        //recyclerView.adapter = adapter
         return fBinding.root
     }
 
@@ -54,10 +51,7 @@ class FirstFragment : Fragment() {
                     viewModel.run {
                         addIndex()
 
-                        if(idxPosition.value == 1)
-                            return
-
-                        getPhotoList()
+                        if(idxPosition.value!! > 1) getPhotoList()
                     }
                 }
             }
