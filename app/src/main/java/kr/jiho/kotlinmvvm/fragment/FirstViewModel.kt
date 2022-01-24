@@ -15,14 +15,20 @@ import kr.jiho.kotlinmvvm.repository.ApiRepository
 
 class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
 
-    // composite
+    /***
+     * CompositeDisposable
+     */
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    // viewBinding
-    private var binding: FirstFragmentBinding = viewBinding
-
-    // repository
+    /**
+     * Api repository
+     */
     private val repo: ApiRepository = ApiRepository()
+
+    /**
+     * View Binding
+     */
+    private var binding: FirstFragmentBinding = viewBinding
 
     // recycler Adapter
     private val adapter = RecyclerAdapter(this)
@@ -30,12 +36,18 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
     // adapter list
     val photoList = ArrayList<Photo>()
 
-    // api page index
+    /**
+     * Mutable LiveData
+     * Page Index
+     */
     private val _index = MutableLiveData<Int>()
 
     val idxPosition: LiveData<Int>
         get() = _index
 
+    /**
+     * 초기화 함수
+     */
     fun init(context: Context) {
         _index.value = 1
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
@@ -52,16 +64,12 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
         }
     }
 
+    /**
+     * API PhotoList
+     * 포토 리스트를 가져온다.
+     */
     fun getPhotoList() {
-        // loading visible
         binding.loadingProgress.visibility = View.VISIBLE
-
-        /*
-        * 1. Repository 에서 리트로핏 과 Api 클래스를 만들고
-        *    기능을 호출한다.
-        * Repository > Retrofit, ApiClass, get function
-        *
-        * */
 
         val item = repo.getPhotoList(_index.value!!).subscribeWith(object: DisposableObserver<ArrayList<Photo>>(){
             override fun onNext(t: ArrayList<Photo>?) {
@@ -69,22 +77,17 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
                     if(t.size == 0) {
                         reduceIndex()
                     }
-
                     photoList.addAll(t)
                 }
             }
 
             override fun onError(e: Throwable?) {
                 e?.printStackTrace()
-
-                // loading hidden
                 binding.loadingProgress.visibility = View.GONE
             }
 
             override fun onComplete() {
                 adapter.notifyDataSetChanged()
-
-                // loading hidden
                 binding.loadingProgress.visibility = View.GONE
             }
         })
@@ -97,6 +100,9 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
         compositeDisposable.clear()
     }
 
+    /**
+     * Disposable 해제
+     */
     override fun onCleared() {
         super.onCleared()
 

@@ -6,26 +6,52 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_main_title"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/layout_tob_bar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="8dp"
-        android:text="Anonymous"
-        android:textSize="24sp"
-        />
+        android:background="@color/purple_700"
+        android:padding="16dp"
+        >
+        <TextView
+            android:id="@+id/tv_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/btn_logout"
+            android:text="Anonymous"
+            android:textSize="24sp"
+            />
 
-    <Button
-        android:id="@+id/btn_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그아웃"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="8dp"
-        />
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="로그아웃"
+            android:layout_alignParentEnd="true"
+            />
+
+        <TextView
+            android:id="@+id/tv_value_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_logout"
+            android:textColor="@color/text_color"
+            android:text="jiho.kim"
+            />
+
+        <TextView
+            android:id="@+id/tv_value_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_below="@id/btn_logout"
+            android:layout_toRightOf="@id/tv_value_1"
+            android:textColor="@color/text_color"
+            android:text="job information"
+            />
+    </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/mainFrame"
@@ -33,7 +59,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_logout"
+        app:layout_constraintTop_toBottomOf="@id/layout_tob_bar"
         app:layout_constraintBottom_toTopOf="@id/bottomNavigation"
         />
 
