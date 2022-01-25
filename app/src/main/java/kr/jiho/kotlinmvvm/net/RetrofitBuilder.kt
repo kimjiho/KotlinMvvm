@@ -9,11 +9,11 @@ class RetrofitBuilder {
 
     private var retrofit: Retrofit? = null
 
-    fun getInstance(): Retrofit {
+    fun getInstance(url: String): Retrofit {
         if(retrofit == null)
         {
             retrofit = Retrofit.Builder()
-                .baseUrl(CommonUrl.photoList)
+                .baseUrl(url)
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

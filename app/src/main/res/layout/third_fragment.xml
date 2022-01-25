@@ -3,12 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ThirdFragment"
-    android:background="@color/material_on_background_emphasis_high_type">
+    tools:context=".fragment.ThirdFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_third"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        />
+
+    <ProgressBar
+        android:id="@+id/loadingProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
 
 </FrameLayout>

@@ -10,4 +10,5 @@
 
     <color name="text_color">#FF000000</color>
     <color name="nv_bg_color">#14BDBC</color>
+    <color name="splash_bg_color">#FFFFFFFF</color>
 </resources>

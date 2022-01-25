@@ -3,7 +3,6 @@ package kr.jiho.kotlinmvvm.ui
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kr.jiho.kotlinmvvm.R
 import kr.jiho.kotlinmvvm.databinding.ActivityMainBinding
 import kr.jiho.kotlinmvvm.fragment.FirstFragment
@@ -35,9 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         // 시작화면 설정
         replaceFragment(1)
-        bottomNavigation.selectedItemId = R.id.home
+        binding.bottomNavigation.selectedItemId = R.id.home
 
-        bottomNavigation.setOnItemSelectedListener {
+        binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.person-> replaceFragment(0)
                 R.id.home-> replaceFragment(1)
@@ -46,13 +45,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             true
-        }
-
-        binding.btnLogout.setOnClickListener {
-            Intent(applicationContext, LoginActivity::class.java).apply {
-                startActivity(this)
-                finishAffinity()
-            }
         }
     }
 

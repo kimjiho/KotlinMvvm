@@ -1,15 +1,12 @@
 package kr.jiho.kotlinmvvm.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
-import androidx.core.widget.addTextChangedListener
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.activity_login.*
 import kr.jiho.kotlinmvvm.databinding.ActivityLoginBinding
 import kr.jiho.kotlinmvvm.model.LoginViewModel
 
@@ -27,9 +24,9 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // button disabled
-        btn_login.isEnabled = false
+        binding.btnLogin.isEnabled = false
 
-        edt_id.addTextChangedListener(object: TextWatcher{
+        binding.edtId.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -41,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
-        edt_pwd.addTextChangedListener(object: TextWatcher{
+        binding.edtPwd.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -55,7 +52,7 @@ class LoginActivity : AppCompatActivity() {
 
         // form observer
         val formObserver = Observer<Boolean> {
-            btn_login.isEnabled = it
+            binding.btnLogin.isEnabled = it
         }
         mainViewModel.isFormValid.observe(this, formObserver)
 
@@ -63,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun addButtonEvent() {
-        btn_login.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             // todo call api
 
             // todo use to datastore
@@ -74,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        btn_join.setOnClickListener {
+        binding.btnJoin.setOnClickListener {
             Intent(applicationContext, JoinActivity::class.java).apply {
                 startActivity(this)
                 finishAffinity()

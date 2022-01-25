@@ -4,7 +4,7 @@
     <style name="Theme.KotlinMvvm" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimaryVariant">@android:color/transparent</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -13,5 +13,15 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.Splash.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_bg_color</item>
+
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_baseline_view_in_ar_24</item>
+
+        <item name="android:windowSplashScreenAnimationDuration">3500</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.KotlinMvvm</item>
     </style>
 </resources>

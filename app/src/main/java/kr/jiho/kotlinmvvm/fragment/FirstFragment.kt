@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.first_fragment.*
 import kr.jiho.kotlinmvvm.databinding.FirstFragmentBinding
 
 class FirstFragment : Fragment() {
@@ -38,7 +37,7 @@ class FirstFragment : Fragment() {
         viewModel.init(view.context)
         viewModel.getPhotoList()
 
-        recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
+        fBinding.recyclerView.addOnScrollListener(object: RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 

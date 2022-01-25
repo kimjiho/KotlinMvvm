@@ -1,5 +1,6 @@
 package kr.jiho.kotlinmvvm.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,19 +11,20 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.second_fragment.*
 import kr.jiho.kotlinmvvm.adapter.DummyRecyclerAdapter
 import kr.jiho.kotlinmvvm.databinding.SecondFragmentBinding
+import kr.jiho.kotlinmvvm.ui.LoginActivity
 
 class SecondFragment : Fragment() {
 
     private lateinit var viewModel: SecondViewModel
+    private lateinit var binding: SecondFragmentBinding
 
     private val arrString = arrayOf("abcde\n12345", "fghij\n12345", "klmnop\n12345", "qrstu\n12345", "vwxyz\n12345", "abcde\n12345", "fghij\n12345", "klmnop\n12345", "qrstu\n12345", "vwxyz\n12345")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        val binding = SecondFragmentBinding.inflate(inflater, container, false)
+        binding = SecondFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,17 +37,24 @@ class SecondFragment : Fragment() {
         // load image
         Glide.with(view.context)
             .load("https://placedog.net/200/200?random")
-            .into(img_top)
+            .into(binding.imgTop)
             .onLoadFailed(drawable)
 
         val adapter = DummyRecyclerAdapter(arrString)
-        recycler_one.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        recycler_one.adapter = adapter
+        binding.recyclerOne.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.recyclerOne.adapter = adapter
 
-        recycler_two.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        recycler_two.adapter = adapter
+        binding.recyclerTwo.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        binding.recyclerTwo.adapter = adapter
 
-        loadingProgress.visibility = View.GONE
+        binding.loadingProgress.visibility = View.GONE
+
+        binding.btnLogout.setOnClickListener {
+            Intent(view.context, LoginActivity::class.java).apply {
+                startActivity(this)
+                activity?.finishAffinity()
+            }
+        }
     }
 
     override fun onDestroy() {

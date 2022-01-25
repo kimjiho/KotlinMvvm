@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableObserver
 import kr.jiho.kotlinmvvm.adapter.RecyclerAdapter
+import kr.jiho.kotlinmvvm.const.CommonUrl
 import kr.jiho.kotlinmvvm.databinding.FirstFragmentBinding
 import kr.jiho.kotlinmvvm.net.Photo
 import kr.jiho.kotlinmvvm.repository.ApiRepository
@@ -23,7 +24,7 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
     /**
      * Api repository
      */
-    private val repo: ApiRepository = ApiRepository()
+    private val repo: ApiRepository = ApiRepository(CommonUrl.photoList)
 
     /**
      * View Binding
