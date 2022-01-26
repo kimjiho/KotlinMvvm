@@ -12,18 +12,25 @@ import kr.jiho.kotlinmvvm.R
 import kr.jiho.kotlinmvvm.fragment.FirstViewModel
 import kr.jiho.kotlinmvvm.model.CommonViewModel
 
-class RecyclerAdapter(private val viewModel: CommonViewModel) : RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
+class RecyclerAdapter(private val viewModel: CommonViewModel,
+        private val type: Int) : RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.recycle_item, parent, false)
+
+        val resourceId = if(type == 1) {
+            R.layout.recycle_item
+        }else {
+            R.layout.recycle_item_horizontal
+        }
+
+        val view = inflater.inflate(resourceId, parent, false)
         return RecycleViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RecycleViewHolder, position: Int) {
         val value = viewModel.photoList[position]
         val author = value.author
-        //val strId = value.id
         val downloadUrl = value.download_url
 
         holder.tv.text = author

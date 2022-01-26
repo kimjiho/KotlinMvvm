@@ -38,7 +38,7 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : CommonViewModel() {
     // adapter list
     //val photoList = ArrayList<Photo>()
 
-    override var adapter: RecyclerAdapter = RecyclerAdapter(this)
+    override var adapter: RecyclerAdapter = RecyclerAdapter(this, 1)
 
     /**
      * Mutable LiveData

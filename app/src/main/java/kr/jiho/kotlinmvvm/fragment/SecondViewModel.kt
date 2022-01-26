@@ -28,7 +28,7 @@ class SecondViewModel(private val binding: SecondFragmentBinding) : CommonViewMo
      */
     //private val repo: ApiRepository = ApiRepository(CommonUrl.photoList)
 
-    override var adapter: RecyclerAdapter = RecyclerAdapter(this)
+    override var adapter: RecyclerAdapter = RecyclerAdapter(this, 2)
 
     fun init(context: Context) {
         val drawable = AppCompatResources.getDrawable(context, android.R.drawable.gallery_thumb)
