@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.jiho.kotlinmvvm.R
 import kr.jiho.kotlinmvvm.fragment.FirstViewModel
+import kr.jiho.kotlinmvvm.model.CommonViewModel
 
-class RecyclerAdapter(private val viewModel: FirstViewModel) : RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
+class RecyclerAdapter(private val viewModel: CommonViewModel) : RecyclerView.Adapter<RecyclerAdapter.RecycleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecycleViewHolder {
         val inflater = LayoutInflater.from(parent.context)

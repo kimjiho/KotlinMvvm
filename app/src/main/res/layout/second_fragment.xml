@@ -22,22 +22,23 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:padding="16dp"
+                android:padding="8dp"
                 >
+
                 <TextView
                     android:id="@+id/tv_main_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/btn_logout"
-                    android:text="Anonymous"
-                    android:textSize="24sp"
-                    />
+                    android:text="Home"
+                    android:textSize="16sp" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/btn_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="로그아웃"
+                    android:src="@android:drawable/ic_menu_more"
+                    android:background="@null"
                     android:layout_alignParentEnd="true"
                     />
 
@@ -64,9 +65,10 @@
 
             <ImageView
                 android:id="@+id/img_top"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="260dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitStart"
+                android:adjustViewBounds="true"
                 app:layout_constraintTop_toBottomOf="@id/layout_tob_bar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -30,24 +30,13 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
+        viewModel = SecondViewModel(binding)
+        viewModel.init(view.context)
 
-        val drawable = AppCompatResources.getDrawable(view.context, android.R.drawable.gallery_thumb)
-
-        // load image
-        Glide.with(view.context)
-            .load("https://placedog.net/200/200?random")
-            .into(binding.imgTop)
-            .onLoadFailed(drawable)
-
+        // dummy
         val adapter = DummyRecyclerAdapter(arrString)
-        binding.recyclerOne.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        binding.recyclerOne.adapter = adapter
-
         binding.recyclerTwo.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         binding.recyclerTwo.adapter = adapter
-
-        binding.loadingProgress.visibility = View.GONE
 
         binding.btnLogout.setOnClickListener {
             Intent(view.context, LoginActivity::class.java).apply {
@@ -55,10 +44,13 @@ class SecondFragment : Fragment() {
                 activity?.finishAffinity()
             }
         }
+
+        viewModel.getPhotoList()
     }
 
     override fun onDestroy() {
         super.onDestroy()
+        viewModel.clearDispose()
     }
 
 }

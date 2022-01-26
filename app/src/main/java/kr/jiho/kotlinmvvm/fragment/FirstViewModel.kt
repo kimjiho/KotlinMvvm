@@ -11,20 +11,21 @@ import io.reactivex.rxjava3.observers.DisposableObserver
 import kr.jiho.kotlinmvvm.adapter.RecyclerAdapter
 import kr.jiho.kotlinmvvm.const.CommonUrl
 import kr.jiho.kotlinmvvm.databinding.FirstFragmentBinding
+import kr.jiho.kotlinmvvm.model.CommonViewModel
 import kr.jiho.kotlinmvvm.net.Photo
 import kr.jiho.kotlinmvvm.repository.ApiRepository
 
-class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
+class FirstViewModel(viewBinding: FirstFragmentBinding) : CommonViewModel() {
 
     /***
      * CompositeDisposable
      */
-    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    //private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     /**
      * Api repository
      */
-    private val repo: ApiRepository = ApiRepository(CommonUrl.photoList)
+    //private val repo: ApiRepository = ApiRepository(CommonUrl.photoList)
 
     /**
      * View Binding
@@ -32,10 +33,12 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
     private var binding: FirstFragmentBinding = viewBinding
 
     // recycler Adapter
-    private val adapter = RecyclerAdapter(this)
+    //private val adapter = RecyclerAdapter(this)
 
     // adapter list
-    val photoList = ArrayList<Photo>()
+    //val photoList = ArrayList<Photo>()
+
+    override var adapter: RecyclerAdapter = RecyclerAdapter(this)
 
     /**
      * Mutable LiveData
@@ -106,6 +109,8 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : ViewModel() {
      */
     override fun onCleared() {
         super.onCleared()
+
+        photoList.clear()
 
         if(!compositeDisposable.isDisposed)
             compositeDisposable.dispose()

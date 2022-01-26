@@ -11,6 +11,11 @@ class ApiRepository(private val url: String) {
 
     private val api = RandomApi.create(url)
 
+    fun getDefaultPhotoList(): Observable<ArrayList<Photo>> = api
+        .getPhotoList()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+
     fun getPhotoList(idx: Int): Observable<ArrayList<Photo>> = api
         .getPhotoListByPage(idx)
         .subscribeOn(Schedulers.io())
