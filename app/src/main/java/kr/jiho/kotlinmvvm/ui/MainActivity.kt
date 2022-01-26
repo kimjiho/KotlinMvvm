@@ -21,10 +21,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         /**
-         * 대시보드
-         * 채팅
-         * 설정
-         *
          * 네비게이션 드로워
           *  단축메뉴
           *  로그아웃
