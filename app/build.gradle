@@ -76,4 +76,6 @@ dependencies {
     // splash
     implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
 
+    // rxDownload
+    implementation 'com.github.esafirm:rxdownloader:2.0.0'
 }

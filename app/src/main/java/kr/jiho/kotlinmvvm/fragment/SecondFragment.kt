@@ -2,6 +2,8 @@ package kr.jiho.kotlinmvvm.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.esafirm.rxdownloader.RxDownloader
 import kr.jiho.kotlinmvvm.adapter.DummyRecyclerAdapter
 import kr.jiho.kotlinmvvm.databinding.SecondFragmentBinding
 import kr.jiho.kotlinmvvm.service.DownloadService
@@ -47,15 +50,30 @@ class SecondFragment : Fragment() {
         }
 
         binding.btnStart.setOnClickListener {
-            Intent(view.context, DownloadService::class.java).apply {
-                context?.startForegroundService(this)
-            }
+//            Intent(view.context, DownloadService::class.java).apply {
+//                context?.startForegroundService(this)
+//            }
+
+            val url = "https://vod.cdn.hunet.co.kr/eLearning/Hunet/HLSC55725/01_05.mp4"
+            //val path = context?.getExternalFilesDir("hunet")
+
+            var disposable = RxDownloader(view.context)
+                .downloadInFilesDir(
+                    url,
+                    "video_file",
+                    "files",
+                    "video/mp4",
+                    true
+                ).subscribe({ path -> Log.w("DEBUG", "subScribe path: $path") })
+                { throwable ->
+                  throwable.printStackTrace()
+                }
         }
 
         binding.btnEnd.setOnClickListener {
-            Intent(view.context, DownloadService::class.java).apply {
-                context?.stopService(this)
-            }
+//            Intent(view.context, DownloadService::class.java).apply {
+//                context?.stopService(this)
+//            }
         }
 
         viewModel.getPhotoList()
