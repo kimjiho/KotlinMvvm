@@ -47,19 +47,35 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/btn_logout"
-                    android:textColor="@color/text_color"
                     android:text="jiho.kim"
-                    />
+                    android:textColor="@color/text_color" />
 
                 <TextView
                     android:id="@+id/tv_value_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
                     android:layout_below="@id/btn_logout"
+                    android:layout_marginStart="4dp"
                     android:layout_toRightOf="@id/tv_value_1"
-                    android:textColor="@color/text_color"
                     android:text="job information"
+                    android:textColor="@color/text_color" />
+
+                <Button
+                    android:id="@+id/btn_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_value_2"
+                    android:text="start"
+                    />
+
+                <Button
+                    android:id="@+id/btn_end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_below="@id/tv_value_2"
+                    android:layout_toRightOf="@id/btn_start"
+                    android:text="end"
                     />
             </RelativeLayout>
 

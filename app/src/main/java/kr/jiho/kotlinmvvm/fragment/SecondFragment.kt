@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kr.jiho.kotlinmvvm.adapter.DummyRecyclerAdapter
 import kr.jiho.kotlinmvvm.databinding.SecondFragmentBinding
+import kr.jiho.kotlinmvvm.service.DownloadService
 import kr.jiho.kotlinmvvm.ui.LoginActivity
 
 class SecondFragment : Fragment() {
@@ -42,6 +43,18 @@ class SecondFragment : Fragment() {
             Intent(view.context, LoginActivity::class.java).apply {
                 startActivity(this)
                 activity?.finishAffinity()
+            }
+        }
+
+        binding.btnStart.setOnClickListener {
+            Intent(view.context, DownloadService::class.java).apply {
+                context?.startForegroundService(this)
+            }
+        }
+
+        binding.btnEnd.setOnClickListener {
+            Intent(view.context, DownloadService::class.java).apply {
+                context?.stopService(this)
             }
         }
 
