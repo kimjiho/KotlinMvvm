@@ -3,30 +3,16 @@ package kr.jiho.kotlinmvvm.fragment
 import android.content.Context
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableObserver
 import kr.jiho.kotlinmvvm.adapter.RecyclerAdapter
-import kr.jiho.kotlinmvvm.const.CommonUrl
 import kr.jiho.kotlinmvvm.databinding.SecondFragmentBinding
 import kr.jiho.kotlinmvvm.model.CommonViewModel
 import kr.jiho.kotlinmvvm.net.Photo
-import kr.jiho.kotlinmvvm.repository.ApiRepository
 
 class SecondViewModel(private val binding: SecondFragmentBinding) : CommonViewModel() {
-
-    /***
-     * CompositeDisposable
-     */
-    //private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-
-    /**
-     * Api repository
-     */
-    //private val repo: ApiRepository = ApiRepository(CommonUrl.photoList)
 
     override var adapter: RecyclerAdapter = RecyclerAdapter(this, 2)
 
