@@ -19,35 +19,46 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /**
-         * 네비게이션 드로워
-          *  단축메뉴
-          *  로그아웃
-          *  설정
-         * */
-
-
         // 시작화면 설정
-        replaceFragment(1)
+        replaceFragment(1, R.id.home)
         binding.bottomNavigation.selectedItemId = R.id.home
 
         binding.bottomNavigation.setOnItemSelectedListener {
             when(it.itemId) {
-                R.id.person-> replaceFragment(0)
-                R.id.home-> replaceFragment(1)
-                R.id.settings-> replaceFragment(2)
-                else -> replaceFragment(0)
+                R.id.person-> replaceFragment(0, it.itemId)
+                R.id.home-> replaceFragment(1, it.itemId)
+                R.id.settings-> replaceFragment(2, it.itemId)
+                else -> replaceFragment(0, it.itemId)
             }
 
             true
         }
     }
 
-    private fun replaceFragment(id: Int) {
+    private fun replaceFragment(id: Int, resourceId: Int) {
         val fragment = fragArray[id]
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.mainFrame, fragment).commit()
+        val transaction = supportFragmentManager.beginTransaction()
+
+        var targetFragment = supportFragmentManager.findFragmentByTag(resourceId.toString())
+        if(targetFragment == null) {
+            targetFragment = fragment
+            transaction.add(R.id.mainFrame, targetFragment, resourceId.toString())
         }
+
+        // hide
+        fragArray.forEach {
+            transaction.hide(it)
+        }
+
+        // show
+        transaction.show(targetFragment)
+
+        transaction.commitAllowingStateLoss()
+
+        /*
+        transaction.apply {
+            replace(R.id.mainFrame, fragment).commit()
+        }*/
     }
 }
