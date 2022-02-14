@@ -85,4 +85,7 @@ dependencies {
 
     // rxDownload
     implementation 'com.github.esafirm:rxdownloader:2.0.0'
+
+    // encrypt
+    implementation 'androidx.security:security-crypto:1.1.0-alpha03'
 }

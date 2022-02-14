@@ -1,12 +1,16 @@
 package kr.jiho.kotlinmvvm.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import kr.jiho.kotlinmvvm.databinding.ActivityLoginBinding
 import kr.jiho.kotlinmvvm.model.LoginViewModel
 
@@ -63,9 +67,21 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             // todo call api
 
-            // todo use to datastore
+            val pref = getEncryptPref()
+
+            val idValue = binding.edtId.text.toString()
+            val pwdValue = binding.edtPwd.text.toString()
+
+            val editor = pref.edit()
+            editor.putString("id", idValue)
+            editor.putString("pwd", pwdValue)
+            editor.apply()
 
             Intent(applicationContext, MainActivity::class.java).apply {
+                val id = pref.getString("id", "")
+                val pwd = pref.getString("pwd", "")
+                Log.w("DEBUG", "Encrypt id: $id, pwd: $pwd")
+
                 startActivity(this)
                 finishAffinity()
             }
@@ -77,5 +93,20 @@ class LoginActivity : AppCompatActivity() {
                 finishAffinity()
             }
         }
+    }
+
+    private fun getEncryptPref() : SharedPreferences {
+        // save SharedPreference
+        val masterKey = MasterKey.Builder(applicationContext, MasterKey.DEFAULT_MASTER_KEY_ALIAS)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+
+        val pref = EncryptedSharedPreferences.create(applicationContext,
+            "mvvm_pref",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM)
+
+        return pref
     }
 }
