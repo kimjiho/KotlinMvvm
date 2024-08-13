@@ -33,16 +33,16 @@ class ThirdViewModel(viewBiding: ThirdFragmentBinding) : ViewModel() {
     fun getUserList() {
         val item = api.getUserList(1)
             .subscribeWith(object: DisposableObserver<UserList>(){
-                override fun onNext(t: UserList?) {
-                    for(user: User in t?.data!!) {
+                override fun onNext(t: UserList) {
+                    for(user: User in t.data) {
                         Log.w("DEBUG", "user: ${user.email}")
                     }
 
                     userList.addAll(t.data)
                 }
 
-                override fun onError(e: Throwable?) {
-                    e?.printStackTrace()
+                override fun onError(e: Throwable) {
+                    e.printStackTrace()
                     binding.loadingProgress.visibility = View.GONE
                 }
 

@@ -34,14 +34,12 @@ class SecondViewModel(private val binding: SecondFragmentBinding) : CommonViewMo
 
         val item = repo.getDefaultPhotoList()
             .subscribeWith(object: DisposableObserver<ArrayList<Photo>>(){
-            override fun onNext(t: ArrayList<Photo>?) {
-                if(t != null) {
-                    photoList.addAll(t)
-                }
+            override fun onNext(t: ArrayList<Photo>) {
+                photoList.addAll(t)
             }
 
-            override fun onError(e: Throwable?) {
-                e?.printStackTrace()
+            override fun onError(e: Throwable) {
+                e.printStackTrace()
                 binding.loadingProgress.visibility = View.GONE
             }
 

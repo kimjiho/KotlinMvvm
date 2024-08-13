@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kr.jiho.kotlinmvvm">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
 
     <application
         android:name=".MyApplication"
@@ -16,8 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.KotlinMvvm">
         <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/Theme.Splash.Starting"
+            android:name=".ui.ExoPlayerActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:supportsPictureInPicture="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,19 +28,42 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.LoginActivity">
-        </activity>
+        <service android:name=".service.PlaybackService"
+            android:foregroundServiceType="mediaPlayback"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService"/>
+            </intent-filter>
+        </service>
 
+        <receiver android:name="androidx.media3.session.MediaButtonReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Splash.Starting">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+        </activity>
+        <activity android:name=".ui.LoginActivity"
+            android:exported="false"/>
         <activity
             android:name=".ui.JoinActivity"
             android:exported="false" />
+        <activity android:name=".ui.MainActivity"
+            android:exported="false"/>
 
-        <activity android:name=".ui.MainActivity">
-        </activity>
-
-        <service android:name=".service.DownloadService"
-            android:exported="false"
-            />
+        <service
+            android:name=".service.DownloadService"
+            android:exported="false" />
     </application>
 
 </manifest>

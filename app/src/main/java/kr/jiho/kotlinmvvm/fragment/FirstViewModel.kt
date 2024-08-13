@@ -4,16 +4,12 @@ import android.content.Context
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
-import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableObserver
 import kr.jiho.kotlinmvvm.adapter.RecyclerAdapter
-import kr.jiho.kotlinmvvm.const.CommonUrl
 import kr.jiho.kotlinmvvm.databinding.FirstFragmentBinding
 import kr.jiho.kotlinmvvm.model.CommonViewModel
 import kr.jiho.kotlinmvvm.net.Photo
-import kr.jiho.kotlinmvvm.repository.ApiRepository
 
 class FirstViewModel(viewBinding: FirstFragmentBinding) : CommonViewModel() {
 
@@ -76,17 +72,16 @@ class FirstViewModel(viewBinding: FirstFragmentBinding) : CommonViewModel() {
         binding.loadingProgress.visibility = View.VISIBLE
 
         val item = repo.getPhotoList(_index.value!!).subscribeWith(object: DisposableObserver<ArrayList<Photo>>(){
-            override fun onNext(t: ArrayList<Photo>?) {
-                if(t != null) {
-                    if(t.size == 0) {
-                        reduceIndex()
-                    }
-                    photoList.addAll(t)
-                }
-            }
+               override fun onNext(t: ArrayList<Photo>) {
+                   if(t.size == 0) {
+                       reduceIndex()
+                   }
 
-            override fun onError(e: Throwable?) {
-                e?.printStackTrace()
+                   photoList.addAll(t)
+               }
+
+            override fun onError(e: Throwable) {
+                e.printStackTrace()
                 binding.loadingProgress.visibility = View.GONE
             }
 
